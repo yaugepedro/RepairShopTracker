@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="RepairShopTracker.Tests/RepairShopTracker.Tests.csproj" />
+  <Project Path="RepairShopTracker.Web/RepairShopTracker.Web.csproj" />
+</Solution>

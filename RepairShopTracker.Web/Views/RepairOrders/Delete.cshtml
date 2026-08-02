@@ -1,0 +1,27 @@
+@model RepairShopTracker.Web.Models.RepairOrder
+
+@{
+    ViewData["Title"] = "Eliminar Orden";
+}
+
+<h2>¿Eliminar esta orden?</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Cliente</dt>
+        <dd class="col-sm-9">@Model.ClientName</dd>
+
+        <dt class="col-sm-3">Electrodoméstico</dt>
+        <dd class="col-sm-9">@Model.ApplianceType</dd>
+
+        <dt class="col-sm-3">Falla</dt>
+        <dd class="col-sm-9">@Model.ReportedIssue</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger" id="btnConfirmDelete">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

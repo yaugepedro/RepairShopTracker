@@ -1,0 +1,40 @@
+@model IEnumerable<RepairShopTracker.Web.Models.RepairOrder>
+
+@{
+    ViewData["Title"] = "Órdenes de Reparación";
+}
+
+<h2>Órdenes de Reparación</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary" id="btnCreateNew">Nueva Orden</a>
+</p>
+
+<table class="table" id="ordersTable">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Electrodoméstico</th>
+            <th>Falla</th>
+            <th>Estado</th>
+            <th>Costo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row-@item.Id">
+                <td>@item.ClientName</td>
+                <td>@item.ApplianceType</td>
+                <td>@item.ReportedIssue</td>
+                <td>@item.Status</td>
+                <td>@item.Cost</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning edit-btn">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger delete-btn">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

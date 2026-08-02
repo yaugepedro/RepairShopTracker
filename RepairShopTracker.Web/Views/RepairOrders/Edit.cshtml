@@ -1,0 +1,48 @@
+@model RepairShopTracker.Web.Models.RepairOrder
+
+@{
+    ViewData["Title"] = "Editar Orden";
+}
+
+<h2>Editar Orden de Reparación</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="ClientName" class="form-label">Cliente</label>
+        <input asp-for="ClientName" class="form-control" id="clientName" />
+        <span asp-validation-for="ClientName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ApplianceType" class="form-label">Electrodoméstico</label>
+        <input asp-for="ApplianceType" class="form-control" id="applianceType" />
+        <span asp-validation-for="ApplianceType" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReportedIssue" class="form-label">Falla Reportada</label>
+        <textarea asp-for="ReportedIssue" class="form-control" id="reportedIssue"></textarea>
+        <span asp-validation-for="ReportedIssue" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Estado</label>
+        <select asp-for="Status" class="form-control" id="status">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Completada">Completada</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Cost" class="form-label">Costo</label>
+        <input asp-for="Cost" class="form-control" id="cost" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
