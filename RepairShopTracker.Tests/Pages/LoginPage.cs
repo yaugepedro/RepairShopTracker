@@ -43,6 +43,7 @@ namespace RepairShopTracker.Tests.Pages
             EnterUsername(username);
             EnterPassword(password);
             ClickLogin();
+            Thread.Sleep(1000);
         }
 
         public bool HasErrorMessage()

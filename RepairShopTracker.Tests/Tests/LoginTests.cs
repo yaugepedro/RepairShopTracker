@@ -9,7 +9,7 @@ namespace RepairShopTracker.Tests.Tests
     public class LoginTests
     {
         private IWebDriver _driver = null!;
-        private LoginPage _loginPage;
+        private LoginPage _loginPage = null!;
 
         [SetUp]
         public void Setup()
@@ -18,8 +18,6 @@ namespace RepairShopTracker.Tests.Tests
             _loginPage = new LoginPage(_driver);
         }
 
-        // Historia de Usuario 1: Login
-        // Caso 1: Camino feliz - login con credenciales válidas
         [Test]
         public void Login_CaminoFeliz_CredencialesValidas_DeberiaIngresar()
         {
@@ -29,7 +27,6 @@ namespace RepairShopTracker.Tests.Tests
                 "El usuario debería ser redirigido a la lista de órdenes tras un login exitoso");
         }
 
-        // Caso 2: Prueba negativa - login con contraseña incorrecta
         [Test]
         public void Login_PruebaNegativa_ContrasenaIncorrecta_DeberiaMostrarError()
         {
@@ -41,7 +38,6 @@ namespace RepairShopTracker.Tests.Tests
                 "El usuario debería permanecer en la página de login");
         }
 
-        // Caso 3: Prueba de límites - campos vacíos
         [Test]
         public void Login_PruebaLimites_CamposVacios_DeberiaMostrarValidacion()
         {
@@ -57,7 +53,10 @@ namespace RepairShopTracker.Tests.Tests
             string testName = TestContext.CurrentContext.Test.Name;
             ScreenshotHelper.TakeScreenshot(_driver, testName);
 
+            Thread.Sleep(10000);
+
             _driver.Quit();
+            _driver.Dispose();
         }
     }
 }
