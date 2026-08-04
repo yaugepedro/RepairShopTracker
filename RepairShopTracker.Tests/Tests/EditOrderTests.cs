@@ -24,7 +24,6 @@ namespace RepairShopTracker.Tests.Tests
             _indexPage = new RepairOrdersIndexPage(_driver);
             _editOrderPage = new EditOrderPage(_driver);
 
-            // Nombre único por test para evitar colisiones entre corridas
             _clientName = $"ClienteEditar_{Guid.NewGuid():N}".Substring(0, 20);
 
             _loginPage.Login("admin", "Admin123!");
@@ -79,6 +78,9 @@ namespace RepairShopTracker.Tests.Tests
         {
             string testName = TestContext.CurrentContext.Test.Name;
             ScreenshotHelper.TakeScreenshot(_driver, testName);
+
+            Thread.Sleep(TestConfig.EndOfTestDelayMs);
+
             _driver.Quit();
             _driver.Dispose();
         }

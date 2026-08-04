@@ -49,7 +49,6 @@ namespace RepairShopTracker.Tests.Tests
         [Test]
         public void ListarOrdenes_PruebaLimites_NombreClienteConLongitudMaxima_DeberiaMostrarseCompleto()
         {
-            // El modelo permite hasta 100 caracteres en ClientName ([StringLength(100)])
             string nombreLimite = new string('C', 100);
             _createOrderPage.CreateOrder(nombreLimite, "Radio", "No prende", 150);
 
@@ -64,6 +63,9 @@ namespace RepairShopTracker.Tests.Tests
         {
             string testName = TestContext.CurrentContext.Test.Name;
             ScreenshotHelper.TakeScreenshot(_driver, testName);
+
+            Thread.Sleep(TestConfig.EndOfTestDelayMs);
+
             _driver.Quit();
             _driver.Dispose();
         }

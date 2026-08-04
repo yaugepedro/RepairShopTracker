@@ -20,25 +20,25 @@ namespace RepairShopTracker.Tests.Pages
         public void Navigate()
         {
             _driver.Navigate().GoToUrl(_url);
-            Thread.Sleep(1500);
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
         }
 
         public void EnterUsername(string username)
         {
             _driver.FindElement(UsernameField).SendKeys(username);
-            Thread.Sleep(800);
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
         }
 
         public void EnterPassword(string password)
         {
             _driver.FindElement(PasswordField).SendKeys(password);
-            Thread.Sleep(800);
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
         }
 
         public void ClickLogin()
         {
             _driver.FindElement(LoginButton).Click();
-            Thread.Sleep(1500);
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
         }
 
         public void Login(string username, string password)

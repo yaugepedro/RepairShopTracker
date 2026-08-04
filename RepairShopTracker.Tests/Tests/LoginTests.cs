@@ -53,7 +53,7 @@ namespace RepairShopTracker.Tests.Tests
             string testName = TestContext.CurrentContext.Test.Name;
             ScreenshotHelper.TakeScreenshot(_driver, testName);
 
-            Thread.Sleep(10000);
+            Thread.Sleep(TestConfig.EndOfTestDelayMs);
 
             _driver.Quit();
             _driver.Dispose();

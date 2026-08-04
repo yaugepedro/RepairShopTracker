@@ -61,7 +61,6 @@ namespace RepairShopTracker.Tests.Tests
             _deleteOrderPage.NavigateToDelete("999999");
 
             Assert.That(_driver.PageSource, Does.Not.Contain(_clientName));
-            // Nota: ajusta este assert según cómo se vea tu página de error 404 real
         }
 
         [TearDown]
@@ -69,6 +68,9 @@ namespace RepairShopTracker.Tests.Tests
         {
             string testName = TestContext.CurrentContext.Test.Name;
             ScreenshotHelper.TakeScreenshot(_driver, testName);
+
+            Thread.Sleep(TestConfig.EndOfTestDelayMs);
+
             _driver.Quit();
             _driver.Dispose();
         }
