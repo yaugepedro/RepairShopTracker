@@ -14,10 +14,8 @@ namespace RepairShopTracker.Web.Controllers
             _context = context;
         }
 
-        // Filtro simple: si no hay sesión, manda al login
         private bool IsLoggedIn() => HttpContext.Session.GetString("Username") != null;
 
-        // GET: RepairOrders (Read - listado)
         public async Task<IActionResult> Index()
         {
             if (!IsLoggedIn()) return RedirectToAction("Login", "Account");
@@ -26,14 +24,12 @@ namespace RepairShopTracker.Web.Controllers
             return View(orders);
         }
 
-        // GET: RepairOrders/Create
         public IActionResult Create()
         {
             if (!IsLoggedIn()) return RedirectToAction("Login", "Account");
             return View();
         }
 
-        // POST: RepairOrders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RepairOrder order)
@@ -50,7 +46,6 @@ namespace RepairShopTracker.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: RepairOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (!IsLoggedIn()) return RedirectToAction("Login", "Account");
@@ -62,7 +57,6 @@ namespace RepairShopTracker.Web.Controllers
             return View(order);
         }
 
-        // POST: RepairOrders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, RepairOrder order)
@@ -80,7 +74,6 @@ namespace RepairShopTracker.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: RepairOrders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (!IsLoggedIn()) return RedirectToAction("Login", "Account");
@@ -92,7 +85,6 @@ namespace RepairShopTracker.Web.Controllers
             return View(order);
         }
 
-        // POST: RepairOrders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
