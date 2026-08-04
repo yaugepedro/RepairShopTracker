@@ -43,6 +43,8 @@ namespace RepairShopTracker.Web.Controllers
 
             _context.Add(order);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Orden creada exitosamente.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -71,6 +73,8 @@ namespace RepairShopTracker.Web.Controllers
 
             _context.Update(order);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Orden editada exitosamente.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -97,6 +101,8 @@ namespace RepairShopTracker.Web.Controllers
                 _context.RepairOrders.Remove(order);
                 await _context.SaveChangesAsync();
             }
+
+            TempData["SuccessMessage"] = "Orden eliminada exitosamente.";
             return RedirectToAction(nameof(Index));
         }
     }

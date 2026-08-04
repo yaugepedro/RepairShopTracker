@@ -23,36 +23,42 @@ namespace RepairShopTracker.Tests.Pages
         public void Navigate()
         {
             _driver.Navigate().GoToUrl(_url);
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
         }
 
         public void FillForm(string clientName, string applianceType, string reportedIssue, decimal? cost = null)
         {
             if (!string.IsNullOrEmpty(clientName))
+            {
                 _driver.FindElement(ClientNameField).SendKeys(clientName);
+                Thread.Sleep(Utils.TestConfig.StepDelayMs);
+            }
 
             if (!string.IsNullOrEmpty(applianceType))
+            {
                 _driver.FindElement(ApplianceTypeField).SendKeys(applianceType);
+                Thread.Sleep(Utils.TestConfig.StepDelayMs);
+            }
 
             if (!string.IsNullOrEmpty(reportedIssue))
             {
-                // Usamos JavaScript para asignar el valor directamente y
-                // saltarnos el atributo maxlength="500" que el navegador
-                // agrega automáticamente por el [StringLength(500)] del modelo.
-                // Así podemos probar que la validación del SERVIDOR
-                // realmente rechaza texto que excede el límite.
                 var field = _driver.FindElement(ReportedIssueField);
                 var js = (IJavaScriptExecutor)_driver;
                 js.ExecuteScript("arguments[0].value = arguments[1];", field, reportedIssue);
+                Thread.Sleep(Utils.TestConfig.StepDelayMs);
             }
 
             if (cost.HasValue)
+            {
                 _driver.FindElement(CostField).SendKeys(cost.Value.ToString());
+                Thread.Sleep(Utils.TestConfig.StepDelayMs);
+            }
         }
 
         public void Save()
         {
             _driver.FindElement(SaveButton).Click();
-            Thread.Sleep(1000);
+            Thread.Sleep(Math.Max(1000, Utils.TestConfig.StepDelayMs));
         }
 
         public void CreateOrder(string clientName, string applianceType, string reportedIssue, decimal? cost = null)

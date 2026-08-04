@@ -6,6 +6,13 @@
 
 <h2>Órdenes de Reparación</h2>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
 <p>
     <a asp-action="Create" class="btn btn-primary" id="btnCreateNew">Nueva Orden</a>
 </p>

@@ -12,14 +12,22 @@ namespace RepairShopTracker.Tests.Pages
 
         public DeleteOrderPage(IWebDriver driver) => _driver = driver;
 
-        public void NavigateToDelete(string id) => _driver.Navigate().GoToUrl($"{_baseUrl}/{id}");
+        public void NavigateToDelete(string id)
+        {
+            _driver.Navigate().GoToUrl($"{_baseUrl}/{id}");
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
+        }
 
         public void ConfirmDelete()
         {
             _driver.FindElement(ConfirmDeleteButton).Click();
-            Thread.Sleep(1000);
+            Thread.Sleep(Math.Max(1000, Utils.TestConfig.StepDelayMs));
         }
 
-        public void Cancel() => _driver.FindElement(CancelLink).Click();
+        public void Cancel()
+        {
+            _driver.FindElement(CancelLink).Click();
+            Thread.Sleep(Utils.TestConfig.StepDelayMs);
+        }
     }
 }
