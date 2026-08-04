@@ -34,7 +34,16 @@ namespace RepairShopTracker.Tests.Pages
                 _driver.FindElement(ApplianceTypeField).SendKeys(applianceType);
 
             if (!string.IsNullOrEmpty(reportedIssue))
-                _driver.FindElement(ReportedIssueField).SendKeys(reportedIssue);
+            {
+                // Usamos JavaScript para asignar el valor directamente y
+                // saltarnos el atributo maxlength="500" que el navegador
+                // agrega automáticamente por el [StringLength(500)] del modelo.
+                // Así podemos probar que la validación del SERVIDOR
+                // realmente rechaza texto que excede el límite.
+                var field = _driver.FindElement(ReportedIssueField);
+                var js = (IJavaScriptExecutor)_driver;
+                js.ExecuteScript("arguments[0].value = arguments[1];", field, reportedIssue);
+            }
 
             if (cost.HasValue)
                 _driver.FindElement(CostField).SendKeys(cost.Value.ToString());
