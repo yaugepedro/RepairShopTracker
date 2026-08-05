@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using RepairShopTracker.Tests.Pages;
 using RepairShopTracker.Tests.Utils;
@@ -15,6 +16,8 @@ namespace RepairShopTracker.Tests.Tests
         [SetUp]
         public void Setup()
         {
+            ExtentReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
+
             _driver = DriverFactory.CreateDriver();
             _loginPage = new LoginPage(_driver);
             _createOrderPage = new CreateOrderPage(_driver);
@@ -58,7 +61,24 @@ namespace RepairShopTracker.Tests.Tests
         public void Teardown()
         {
             string testName = TestContext.CurrentContext.Test.Name;
-            ScreenshotHelper.TakeScreenshot(_driver, testName);
+            string screenshotPath = ScreenshotHelper.TakeScreenshot(_driver, testName);
+
+            var status = TestContext.CurrentContext.Result.Outcome.Status;
+            if (status == TestStatus.Passed)
+            {
+                ExtentReportManager.CurrentTest?.Pass("Prueba completada exitosamente.");
+            }
+            else if (status == TestStatus.Failed)
+            {
+                string message = TestContext.CurrentContext.Result.Message ?? "La prueba falló.";
+                ExtentReportManager.CurrentTest?.Fail(message);
+            }
+            else
+            {
+                ExtentReportManager.CurrentTest?.Skip("Prueba omitida.");
+            }
+
+            ExtentReportManager.CurrentTest?.AddScreenCaptureFromPath(screenshotPath);
 
             Thread.Sleep(TestConfig.EndOfTestDelayMs);
 
