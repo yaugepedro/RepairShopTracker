@@ -8,12 +8,22 @@ namespace RepairShopTracker.Tests.Utils
         public static IWebDriver CreateDriver()
         {
             var options = new ChromeOptions();
+
+            
             options.AddArgument("--start-maximized");
-            // Descomenta la siguiente línea si quieres correr sin ventana visible:
-            // options.AddArgument("--headless");
+            options.AddArgument("--disable-gpu");
+            options.AddArgument("--no-first-run");
+            options.AddArgument("--no-default-browser-check");
+            options.AddArgument("--disable-extensions");
 
             IWebDriver driver = new ChromeDriver(options);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
+            driver.Manage().Timeouts().ImplicitWait =
+                TimeSpan.Zero;
+
+            driver.Manage().Timeouts().PageLoad =
+                TimeSpan.FromSeconds(30);
+
             return driver;
         }
     }
